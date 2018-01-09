@@ -83,7 +83,7 @@ a:focus {
 
 .row {
   background-position: 0 -30%;
-
+}
 /* Custom page footer */
 .footer {
   padding-top: 194px;
@@ -131,4 +131,13 @@ a:focus {
     border-bottom: 0;
   }
 }
-
+	
+@media screen and (min-width : 320px) { 
+	/* STYLES GO HERE */
+	.jumbotron h1 {
+		font-size: 3em !important;
+	}
+	.jumbotron h2 {
+		font-size: 2em !important;
+	}
+}
