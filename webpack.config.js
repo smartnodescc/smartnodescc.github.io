@@ -1,17 +1,17 @@
 const webpack = require("webpack")
-// const HtmlWebpackPlugin = require("html-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CircularDependencyPlugin = require("circular-dependency-plugin")
 const path = require("path")
 
-const BUILD_DIR = path.resolve(__dirname, "js")
+const BUILD_DIR = __dirname
 const APP_DIR = path.resolve(__dirname, "src")
 const PUBLIC_DIR = __dirname
-//
-// const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-//     template: `${PUBLIC_DIR}/index.html`,
-//     filename: "index.html",
-//     inject: true
-// })
+
+const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
+    template: `${APP_DIR}/index.html`,
+    filename: "index.html",
+    inject: true
+})
 
 // TODO: re-enable multi-pass compilation for enhanced performance in larger projects when https://github.com/jantimon/html-webpack-plugin/issues/533 is fixed
 const HotModuleReplacementPluginConfig = new webpack.HotModuleReplacementPlugin({
@@ -67,8 +67,7 @@ const config = {
             }
         ]
     },
-    // plugins: [HTMLWebpackPluginConfig, HotModuleReplacementPluginConfig, CircularDependencyPluginConfig],
-    plugins: [HotModuleReplacementPluginConfig, CircularDependencyPluginConfig],
+    plugins: [HTMLWebpackPluginConfig, HotModuleReplacementPluginConfig, CircularDependencyPluginConfig],
     // setting for devServer (npm run start)
     devServer: {
         contentBase: PUBLIC_DIR,

@@ -8,8 +8,8 @@
     "build": "webpack -p",
     "serve": "http-server -p 8000",
     "flow": "flow",
-    "lint": "eslint \"**/*.{js,mjs}\"",
-    "format": "eslint --fix \"**/*.{js,mjs}\"",
+    "lint": "eslint \"src/**/*.{js,mjs}\"",
+    "format": "eslint --fix \"src/**/*.{js,mjs}\"",
     "precommit": "lint-staged"
   },
   "repository": {
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/smartnodescc/smartnodescc.github.io#readme",
   "lint-staged": {
-    "**/*.{js,mjs}": "eslint"
+    "src/**/*.{js,mjs}": "eslint"
   },
   "dependencies": {
     "emotion": "^8.0.12",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "8.0.3",
+    "babel-eslint": "8.1.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-emotion": "^8.0.12",
     "babel-plugin-module-resolver": "^3.0.0",
