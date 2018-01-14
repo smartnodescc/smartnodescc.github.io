@@ -61,7 +61,7 @@
       </div>
       <div class="alert alert-success" role="alert">
         2018-01-08: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.0.pdf">SmartNode Setup Guide v1.0</a> has been released. Other language versions will be announced as available.<br />
-        2018-01-09: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1.pdf">SmartNode Setup Guide v1.1</a> has been released. Guide is now also available in <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1_RUS.pdf">Russian</a> and <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.1_GER.pdf">German</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)
+        2018-01-09: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1.pdf">SmartNode Setup Guide v1.1</a> has been released. Guide is now also available in <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1_RUS.pdf">Russian</a> and <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.1_GER.pdf">German</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)<br />
         2018-01-13: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.2.pdf">SmartNode Setup Guide v1.2</a> has been released. This version is also available in <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.2_GER.pdf">German</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)
       </div>
 
@@ -82,7 +82,7 @@
 				</p>
 				<h3>How can I speed up the blockchain syncing for my SmartNode?</h3>
 				<p>Please refer to the <a href="#SmartNode_bootstrap_download">bootstrap download</a> below.</p>
-				<p>If you are working with the Setup Guide you should apply the bootstrap within Section 8 after creating the smartcash.conf and <u>before running smartcashd</u>, type:
+				<p>If you are working with the SmartNode Setup Guide, you should apply the bootstrap within Section 8 after creating the smartcash.conf and <u>before running smartcashd</u>, type:
 				<p><code>wget http://proteanx.com/txindexstrap.zip</code></p>
 				<p><code>unzip txindexstrap.zip</code></p>
 				<p><code>mv blocks ~/.smartcash</code></p>
@@ -100,10 +100,10 @@
 				<h3>When will SmartNode rewards payments start?</h3>
 				<p>SmartNode rewards will be activated on block height 300,000, which will be some time around January 29th.</p>
 				<h3>Node status error "Not capable smartnode: Smartnode not in smartnode list"</h3>
-				<p>You most likely haven't applied the steps described in Section 9 of the Setup Guide correctly. The final step after setting up the VPS is that you move to your desktop computer once again, edit the smartnode.conf there and finally start the node from your software wallet (SmartNode tab).</p>
+				<p>You most likely haven't applied the steps described in Section 9 of the Setup Guide correctly. The final steps after setting up the VPS are that you move to your desktop computer once again, edit the smartnode.conf there and finally start the node from your software wallet (SmartNodes tab).</p>
 				<h3>Node status error "Not capable smartnode: Can't detect valid external address ...</h3>
 				<p>Your hosting provider most likely doesn't support automatically assignation of the external IP or IPv4. This issue has been reported with AWS (Amazon Web Services), among others.
-It can be solved by adding the following line to smartcash.conf of your VPS:
+It can be solved by adding the following line to smartcash.conf on your VPS:
 <code>externalip=PUT_EXTERNAL_IP_OF_YOUR_NODE_HERE</code></p>
 				<h3>Where do I get further support regarding SmartNodes?</h3>
 				<p>Please visit <a href="https://discord.gg/BDUh8jr">#smartnodes on Discord</a>, follow <a href="https://twitter.com/smartcashassist">SmartCash support on Twitter</a> or consult our <a href="https://smartcash.freshdesk.com">SmartCash support platform</a>.</p>
@@ -134,6 +134,7 @@ It can be solved by adding the following line to smartcash.conf of your VPS:
 			<div class="box">
 				<h3>SmartCash Ressources</h3>
 				<p><a href="https://smartcash.cc">SmartCash Website</a></p>
+				<p><a href="https://explorer3.smartcash.cc">SmartCash BlockExplorer</a></p>
 				<p><a href="https://forum.smartcash.cc">SmartCash Forum</a></p>
 				<p><a href="https://discordapp.com/invite/BDUh8jr">SmartCash on Discord</a></p>
 				<p><a href="https://www.reddit.com/r/smartcash">SmartCash on Reddit</a></p>
