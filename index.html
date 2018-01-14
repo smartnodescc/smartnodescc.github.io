@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="SmartNodes">
 	<meta name="robots" content="index,follow">
-	<meta name="keywords" content="SmartNodes, SmartNode, SmartCash, $SMART, SMART, InstantPay, Bitcoin, Zerocoin, Zcoin, coin, crypocurrency, privacy, blockchain, distributed ledger, decentralized">
+	<meta name="keywords" content="SmartNodes, SmartNode, SmartCash, masternode, node, $SMART, SMART, InstantPay, Bitcoin, Zerocoin, Zcoin, coins, coin, crypocurrency, crypto, privacy, blockchain, distributed ledger, decentralized">
     <link rel="icon" href="favicon.ico">
 
     <title>SmartNodes.cc</title>
@@ -60,8 +60,9 @@
         Please <a href="https://smartcash.freshdesk.com/support/solutions/articles/35000032541-how-to-upgrade-to-smartcash-wallet-v1-1-0-everyone-must-do-">upgrade all your wallets to v1.1.0</a>. This version comes with SmartNodes and also includes a important Zerocoin security patch.
       </div>
       <div class="alert alert-success" role="alert">
-        2018-01-08: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.0.pdf">SmartNode Setup Guide v1.0</a> has been released. Other language versions will be announced as available.</br>
+        2018-01-08: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.0.pdf">SmartNode Setup Guide v1.0</a> has been released. Other language versions will be announced as available.<br />
         2018-01-09: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1.pdf">SmartNode Setup Guide v1.1</a> has been released. Guide is now also available in <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1_RUS.pdf">Russian</a> and <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.1_GER.pdf">German</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)
+        2018-01-13: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.2.pdf">SmartNode Setup Guide v1.2</a> has been released. This version is also available in <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.2_GER.pdf">German</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)
       </div>
 
 			<div class="box">
@@ -81,19 +82,36 @@
 				</p>
 				<h3>How can I speed up the blockchain syncing for my SmartNode?</h3>
 				<p>Please refer to the <a href="#SmartNode_bootstrap_download">bootstrap download</a> below.</p>
-				<h3>When will SmartNode rewards payments start?</h3>
-				<p>SmartNode rewards will be activated on block height 300,000, which will be some time around January 29th.</p>
+				<p>If you are working with the Setup Guide you should apply the bootstrap within Section 8 after creating the smartcash.conf and <u>before running smartcashd</u>, type:
+				<p><code>wget http://proteanx.com/txindexstrap.zip</code></p>
+				<p><code>unzip txindexstrap.zip</code></p>
+				<p><code>mv blocks ~/.smartcash</code></p>
+				<p><code>mv chainstate ~/.smartcash</code></p>
+				<p><code>rm txindexstrap.zip</code></p>
+				</code>
 				<h3>Is there a install script for SmartNodes, yet?</h3>
 				<p>Yes, there is a <a href="https://github.com/kevinrombach/smartnodeinstaller">SmartNode Installer Script</a>, but it's still experimental and in development right now, to quote the developer <strong>dustinface</strong>:
             <blockquote>
               <p>Hey. i started to create a simple install script for the VPS part of the SmartNode installation guide. You can just invoke it with some parameters and it will run through all the steps on the VPS.  Its in a early stage and i will update it from time to time (when i have some time left). For the moment it might be better to follow the official guide instead if you not really know what you are doing and you dont have any linux experience. If you have linux experience and you want to contribute to this script in order to help more people to be able to setup smartnodes in a easier way contact me</p>
             </blockquote></p>
-				<h3>Where do I get support regarding SmartNodes?</h3>
-				<p>Please visit <a href="https://discord.gg/BDUh8jr">#smartnodes on Discord</a> or consult our <a href="https://smartcash.freshdesk.com">SmartCash support platform</a>.</p>
-            Frequently asked questions and answers on SmartNodes compiled from Discord by <strong>nflaw</strong>. Last updated: <strong>2018-01-11</strong>.
+				<h3>How long does it take for my SmartNode to change it's status from PRE_ENABLED to ENABLED?</h3>
+				<p>It should take about 10 to 20 minutes or less. If it takes longer than that you can run <code>smartcash-cli smartnode status</code> and it will show you why it can't proceed.</p>
+				<p>If it turns to EXPIRED you have to check if there's something wrong with your setup.</p>
+				<h3>When will SmartNode rewards payments start?</h3>
+				<p>SmartNode rewards will be activated on block height 300,000, which will be some time around January 29th.</p>
+				<h3>Node status error "Not capable smartnode: Smartnode not in smartnode list"</h3>
+				<p>You most likely haven't applied the steps described in Section 9 of the Setup Guide correctly. The final step after setting up the VPS is that you move to your desktop computer once again, edit the smartnode.conf there and finally start the node from your software wallet (SmartNode tab).</p>
+				<h3>Node status error "Not capable smartnode: Can't detect valid external address ...</h3>
+				<p>Your hosting provider most likely doesn't support automatically assignation of the external IP or IPv4. This issue has been reported with AWS (Amazon Web Services), among others.
+It can be solved by adding the following line to smartcash.conf of your VPS:
+<code>externalip=PUT_EXTERNAL_IP_OF_YOUR_NODE_HERE</code></p>
+				<h3>Where do I get further support regarding SmartNodes?</h3>
+				<p>Please visit <a href="https://discord.gg/BDUh8jr">#smartnodes on Discord</a>, follow <a href="https://twitter.com/smartcashassist">SmartCash support on Twitter</a> or consult our <a href="https://smartcash.freshdesk.com">SmartCash support platform</a>.</p>
+            Frequently asked questions and answers on SmartNodes compiled from Discord by <strong>nflaw</strong>. Last updated: <strong>2018-01-13</strong>.
 			</div>
-
-      <!-- Example row of columns -->
+<!--
+      <div id="root"></div>
+-->
       <div class="row">
         <div class="col-md-6">
 			<div class="box">
@@ -135,9 +153,12 @@
 <!--
 	<script src="js/countdown.js"></script>
 -->
-
+</div>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+<!--
+  <script type="text/javascript" src="/bundle.js"></script>
+-->
   </body>
 </html>
