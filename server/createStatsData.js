@@ -14,12 +14,12 @@ export async function getCoinMarketCap() {
 
 export async function getEligibleForSmartRewards() {
     const ccodamRes = await axios.get("http://smartrewards.ccodam.dk/api/HourlyEligibility/24")
-    return ccodamRes.data.SumValue.filter(Boolean).pop()
+    return +ccodamRes.data.SumValue.filter(Boolean).pop()
 }
 
 export async function getSmartNodesCount() {
     const bitcoinerRes = await axios.get("https://smartcash.bitcoiner.me/smartnodes/list/")
-    return re.exec(bitcoinerRes.data)[1]
+    return +re.exec(bitcoinerRes.data)[1]
 }
 
 export default async function createStatsData() {
@@ -33,8 +33,8 @@ export default async function createStatsData() {
     return {
         blockCount,
         price: {
-            usd: priceUsd,
-            btc: priceBtc
+            usd: +priceUsd,
+            btc: +priceBtc
         },
         eligbleForSmartRewards,
         smartNodesCount
