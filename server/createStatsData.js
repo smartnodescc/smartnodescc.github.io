@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const re = /(\d+) total/
+const re = /(\d+) ENABLED/
 
 export async function getBlockCount() {
     const blockCountRes = await axios.get("https://explorer.smartcash.cc/api/getblockcount")
