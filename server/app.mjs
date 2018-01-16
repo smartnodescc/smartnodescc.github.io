@@ -2,6 +2,7 @@ import Koa from "koa"
 import koaBodyParser from "koa-bodyparser"
 import KoaRouter from "koa-router"
 import compress from "koa-compress"
+import cors from "@koa/cors"
 import zlib from "zlib"
 import createApiRouter from "./createApiRouter"
 import createStatsData from "./createStatsData"
@@ -13,6 +14,15 @@ const STATS_INTERVAL = 60 * 1000
 
 // Loading the environment port with default fallbacks
 const HTTP_PORT = process.env.PORT || 80
+
+const isDev = process.env.NODE_ENV !== "production"
+
+// cross origin resource sharing
+app.use(
+    cors({
+        origin: isDev ? "http://localhost:8080" : "http://smartnodes.cc"
+    })
+)
 
 // compression
 app.use(

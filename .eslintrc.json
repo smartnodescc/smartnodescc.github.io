@@ -17,6 +17,9 @@
   "env": {
     "browser": true
   },
+  "globals": {
+      "API_URL": true
+  },
   "settings": {
     "import/resolver": {
         "babel-module": {}

@@ -36,7 +36,6 @@ function getSmartRewardBlockReward(blockReward: number) {
 }
 
 function getMyMasterNodeMonthlyReward(myMasterNodes: number, globalMasterNodes: number, masterNodeBlockReward) {
-    console.log(myMasterNodes, globalMasterNodes)
     return myMasterNodes / globalMasterNodes * getRewardMonth(masterNodeBlockReward)
 }
 
@@ -66,23 +65,22 @@ function getNumMyMasterNode(numSmartCash: number) {
 export default class Calc extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
-        api.currentBlockHeight().then(result => {
-            console.log("currentBlockHeight", result)
-        })
-        api.coinMarketcap().then(result => {
-            console.log("coinMarketcap", result)
-        })
-        api.eligibleSmartRewards().then(result => {
-            console.log("eligibleSmartRewards", result)
+        api.stats().then(({ price, eligbleForSmartRewards, smartNodesCount, blockCount }) => {
+            this.setState({
+                smartCashPrice: price.usd,
+                numGlobalSmartRewardCash: eligbleForSmartRewards,
+                numGlobalMasterNodes: smartNodesCount,
+                currentBlockHeight: blockCount
+            })
         })
     }
 
     state = {
         smartCashPrice: 1.9,
         numSmartCash: 10000,
-        numGlobalSmartRewardCash: 326 * 1000000, // TODO
-        numGlobalMasterNodes: 5000, // TODO
-        currentBlockHeight: 272715, // TODO make dynamic
+        numGlobalSmartRewardCash: "",
+        numGlobalMasterNodes: "",
+        currentBlockHeight: undefined,
         fillAuto: true
     }
 
@@ -225,14 +223,14 @@ export default class Calc extends React.Component<Props, State> {
                                             <div className="form-group">
                                                 <div className="input-group">
                                                     <div className="input-group-addon">
-                                                        Total SmartCash Eligible for SmartRewards
+                                                        SmartCash Eligible for SmartRewards
                                                     </div>
                                                     <input
                                                         type="number"
                                                         className="form-control"
                                                         placeholder="Loading..."
                                                         disabled={fillAuto}
-                                                        value={numGlobalSmartRewardCash}
+                                                        value={numGlobalSmartRewardCash.toFixed(2)}
                                                         onChange={this.handleNumGlobalSmartRewardCash}
                                                     />
                                                 </div>

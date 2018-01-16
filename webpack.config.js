@@ -13,6 +13,10 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
     inject: true
 })
 
+const DefinePluginConfig = new webpack.DefinePlugin({
+    API_URL: JSON.stringify(process.env.API_URL || "http://52.36.225.45/api")
+})
+
 // TODO: re-enable multi-pass compilation for enhanced performance in larger projects when https://github.com/jantimon/html-webpack-plugin/issues/533 is fixed
 const HotModuleReplacementPluginConfig = new webpack.HotModuleReplacementPlugin({
     multiStep: false
@@ -67,7 +71,12 @@ const config = {
             }
         ]
     },
-    plugins: [HTMLWebpackPluginConfig, HotModuleReplacementPluginConfig, CircularDependencyPluginConfig],
+    plugins: [
+        DefinePluginConfig,
+        HTMLWebpackPluginConfig,
+        HotModuleReplacementPluginConfig,
+        CircularDependencyPluginConfig
+    ],
     // setting for devServer (npm run start)
     devServer: {
         contentBase: PUBLIC_DIR,
