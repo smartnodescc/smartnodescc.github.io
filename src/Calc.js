@@ -122,7 +122,7 @@ export default class Calc extends React.Component<Props, State> {
         const numMyMasterNode = getNumMyMasterNode(numSmartCash)
         const masterNodeRequirementsString = numMyMasterNode > 0 ? `${MASTERNODE_PRICE * numMyMasterNode / 1000}K` : 0
         const masterNodeRequirementsConversionString =
-            numMyMasterNode > 0 ? `${MASTERNODE_PRICE * numMyMasterNode * smartCashPrice / 1000}K` : 0
+            numMyMasterNode > 0 ? `${(MASTERNODE_PRICE * numMyMasterNode * smartCashPrice / 1000).toFixed(2)}K` : 0
         const masterNodeAverageWaitingTime = getMasterNodeAverageWaitingTime(numMyMasterNode, numGlobalMasterNodes)
 
         const blockReward = getBlockReward(currentBlockHeight)
