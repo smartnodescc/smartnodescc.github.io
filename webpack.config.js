@@ -3,8 +3,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CircularDependencyPlugin = require("circular-dependency-plugin")
 const path = require("path")
 
-const BUILD_DIR = __dirname
-const APP_DIR = path.resolve(__dirname, "src")
+const BUILD_DIR = path.resolve(__dirname, "calculator")
+const APP_DIR = path.resolve(__dirname, "calculator_src")
 const PUBLIC_DIR = __dirname
 
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -35,7 +35,7 @@ const config = {
     output: {
         path: BUILD_DIR,
         filename: "bundle.js",
-        publicPath: "/"
+        publicPath: "/calculator"
     },
     module: {
         rules: [
