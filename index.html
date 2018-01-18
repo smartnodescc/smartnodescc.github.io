@@ -36,15 +36,13 @@
 
     <div class="container">
       <div class="header clearfix">
-<!--
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">About</a></li>
-            <li role="presentation"><a href="#">Contact</a></li>
+            <li role="presentation"><a href="#SmartNode_Setup_Guide">SmartNode Setup Guide</a></li>
+            <li role="presentation"><a href="#SmartNode_FAQ">SmartNode FAQ</a></li>
+            <li role="presentation"><a href="https://smartcash.bitcoiner.me/smartnodes/list">SmartNodes List</a></li>
           </ul>
         </nav>
--->
 		<a href="http://smartnodes.cc"><img src="img/smartnodes.png" alt="SmartNodes.cc Logo" /></a>
       </div>
 
@@ -56,17 +54,24 @@
 -->
       </div>
 
+      <div class="alert alert-warning" role="alert">
+        <strong>PLEASE BE AWARE OF SCAMMERS:</strong> <u>In order to run a SmartNode you don't have to send your SMART to anybody!</u> You can manage your node, while you keep your funds safe in your local wallet, this also applies to Masternode Hosting services. At the moment, we advise against using services that offer ways of sharing SMART to run a SmartNode, as it is likely that scammers can use this ask for funds and not return them.
+      </div>
+
+
+
       <div class="alert alert-info" role="alert">
         Please <a href="https://smartcash.freshdesk.com/support/solutions/articles/35000032541-how-to-upgrade-to-smartcash-wallet-v1-1-0-everyone-must-do-">upgrade all your wallets to v1.1.0</a>. This version comes with SmartNodes and also includes a important Zerocoin security patch.
       </div>
-      <div class="alert alert-success" role="alert">
+      <div class="alert alert-success" role="alert" id="SmartNode_Setup_Guide">
         2018-01-08: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.0.pdf">SmartNode Setup Guide v1.0</a> has been released. Other language versions will be announced as available.<br />
         2018-01-09: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1.pdf">SmartNode Setup Guide v1.1</a> has been released. Guide is now also available in <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1_RUS.pdf">Russian</a> and <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.1_GER.pdf">German</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)<br />
-        2018-01-13: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.2.pdf">SmartNode Setup Guide v1.2</a> has been released. This version is also available in <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.2_GER.pdf">German</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)
+        2018-01-13: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.2.pdf">SmartNode Setup Guide v1.2</a> has been released. This version is also available in <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.2_GER.pdf">German</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)<br />
+        2018-01-17: <a href="https://github.com/SmartCash/smartnode"> Bash installer for SmartNodes on Ubuntu</a> has been released. (Thanks to <a href="https://forum.smartcash.cc/u/msg768">msg768</a>)
       </div>
 
 			<div class="box">
-				<h2>SmartNode FAQ</h2>
+				<h2 id="SmartNode_FAQ">SmartNode FAQ</h2>
 				<h3>What are the requirements to run a SmartNode?</h3>
 				<p>
 					<ul>
@@ -89,14 +94,15 @@
 				<p><code>mv chainstate ~/.smartcash</code></p>
 				<p><code>rm txindexstrap.zip</code></p>
 				</code>
-				<h3>Is there a install script for SmartNodes, yet?</h3>
-				<p>Yes, there is a <a href="https://github.com/kevinrombach/smartnodeinstaller">SmartNode Installer Script</a>, but it's still experimental and in development right now, to quote the developer <strong>dustinface</strong>:
-            <blockquote>
-              <p>Hey. i started to create a simple install script for the VPS part of the SmartNode installation guide. You can just invoke it with some parameters and it will run through all the steps on the VPS.  Its in a early stage and i will update it from time to time (when i have some time left). For the moment it might be better to follow the official guide instead if you not really know what you are doing and you dont have any linux experience. If you have linux experience and you want to contribute to this script in order to help more people to be able to setup smartnodes in a easier way contact me</p>
-            </blockquote></p>
+				<h3>Is there a install script for SmartNodes?</h3>
+				<p>Yes, there is a <a href="https://github.com/SmartCash/smartnode">official bash installer for SmartNodes on Ubuntu</a>. It comes with cronjobs to make sure that your node is always running and up-to-date as well as secure against DDoS attacks.</p>
+				<p>Please not that this installer is only suitable for a dedicated VPS. The anti-DDoS script in this installer will disable all ports including the HTTP, HTTPS and DNS ports. It will only leave the SmartNode port open as well as a custom port for SSH.</p>
+				<p>There is also an unofficial <a href="https://github.com/kevinrombach/smartnodeinstaller">SmartNode Installer Script</a> maintained by <strong>dustinface</strong>.
 				<h3>How long does it take for my SmartNode to change it's status from PRE_ENABLED to ENABLED?</h3>
 				<p>It should take about 10 to 20 minutes or less. If it takes longer than that you can run <code>smartcash-cli smartnode status</code> and it will show you why it can't proceed.</p>
 				<p>If it turns to EXPIRED you have to check if there's something wrong with your setup.</p>
+				<h3>Do I have to have the desktop wallet always on when running a SmartNode?</h3>
+				<p>No, as soon as the SmartNode reached it's ENABLED status, you basically just have to make sure that you VPS keeps running. The software wallet enables you to monitor and re-enable your node.</p>
 				<h3>When will SmartNode rewards payments start?</h3>
 				<p>SmartNode rewards will be activated on block height 300,000, which will be some time around January 29th.</p>
 				<h3>Node status error "Not capable smartnode: Smartnode not in smartnode list"</h3>
@@ -107,7 +113,7 @@ It can be solved by adding the following line to smartcash.conf on your VPS:
 <code>externalip=PUT_EXTERNAL_IP_OF_YOUR_NODE_HERE</code></p>
 				<h3>Where do I get further support regarding SmartNodes?</h3>
 				<p>Please visit <a href="https://discord.gg/BDUh8jr">#smartnodes on Discord</a>, follow <a href="https://twitter.com/smartcashassist">SmartCash support on Twitter</a> or consult our <a href="https://smartcash.freshdesk.com">SmartCash support platform</a>.</p>
-            Frequently asked questions and answers on SmartNodes compiled from Discord by <strong>nflaw</strong>. Last updated: <strong>2018-01-13</strong>.
+            Frequently asked questions and answers on SmartNodes compiled from Discord by <strong>nflaw</strong>. Last updated: <strong>2018-01-18</strong>.
 			</div>
 <!--
       <div id="root"></div>
@@ -140,6 +146,7 @@ It can be solved by adding the following line to smartcash.conf on your VPS:
 				<p><a href="https://www.reddit.com/r/smartcash">SmartCash on Reddit</a></p>
 				<p><a href="https://twitter.com/scashofficial">SmartCash on Twitter</a></p>
 				<p><a href="https://steemit.com/@smartcash">SmartCash on Steem</a></p>
+				<p><a href="https://t.me/SmartCash_cc">SmartCash on Telegram</a> (unofficial)</p>
 			</div>
 		</div>
       </div>
