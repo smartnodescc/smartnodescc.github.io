@@ -34,17 +34,44 @@
 
   <body>
 
+
     <div class="container">
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="#SmartNode_Setup_Guide">SmartNode Setup Guide</a></li>
-            <li role="presentation"><a href="#SmartNode_FAQ">SmartNode FAQ</a></li>
-            <li role="presentation"><a href="https://smartcash.bitcoiner.me/smartnodes/list">SmartNodes List</a></li>
-          </ul>
-        </nav>
-		<a href="http://smartnodes.cc"><img src="img/smartnodes.png" alt="SmartNodes.cc Logo" /></a>
-      </div>
+
+     <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a href="http://smartnodes.cc"><img src="img/smartnodes.png" alt="SmartNodes.cc Logo" /></a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#SmartNode_Setup">SmartNode Setup</a></li>
+              <li><a href="#SmartNode_FAQ">SmartNode FAQ</a></li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">External SmartNode Ressources <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="https://smartcash.bitcoiner.me/smartnodes/list">SmartNodes List</a></li>
+                  <li><a href="https://smartcash.bitcoiner.me/smartnodes/launch/">SmartNodes Launch Countdown</a></li>
+                  <li><a href="https://smartcash.bitcoiner.me/smartnodes/calculator">SmartNodes Income Calculator</a></li>
+<!--
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+-->
+                </ul>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
 
       <div class="jumbotron">
 		<a href="https://smartcash.cc/wallets/"><img src="img/smartnodes_splash.png" alt="SmartNodes are here!" /></a>
@@ -63,12 +90,46 @@
       <div class="alert alert-info" role="alert">
         Please <a href="https://smartcash.freshdesk.com/support/solutions/articles/35000032541-how-to-upgrade-to-smartcash-wallet-v1-1-0-everyone-must-do-">upgrade all your wallets to v1.1.0</a>. This version comes with SmartNodes and also includes a important Zerocoin security patch.
       </div>
-      <div class="alert alert-success" role="alert" id="SmartNode_Setup_Guide">
+
+      <div class="alert alert-success" role="alert" id="SmartNode_Latest">
+				<p>
         2018-01-08: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.0.pdf">SmartNode Setup Guide v1.0</a> has been released. Other language versions will be announced as available.<br />
         2018-01-09: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1.pdf">SmartNode Setup Guide v1.1</a> has been released. Guide is now also available in <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1_RUS.pdf">Russian</a> and <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.1_GER.pdf">German</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)<br />
-        2018-01-13: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.2.pdf">SmartNode Setup Guide v1.2</a> has been released. This version is also available in <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.2_GER.pdf">German</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)<br />
-        2018-01-17: <a href="https://github.com/SmartCash/smartnode"> Bash installer for SmartNodes on Ubuntu</a> has been released. (Thanks to <a href="https://forum.smartcash.cc/u/msg768">msg768</a>)
+        2018-01-13: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.2.pdf">SmartNode Setup Guide v1.2</a> has been released. This version is also available in <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.2_GER.pdf">German</a> and <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.2_RUS.pdf">Russian</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)<br />
+        2018-01-17: <a href="https://github.com/SmartCash/smartnode">Bash installer for SmartNodes on Ubuntu</a> has been released. (Thanks to <a href="https://forum.smartcash.cc/u/msg768">msg768</a>)<br />
+        2018-01-21: <a href="http://smartnodes.cc/files/CreatingSmartNodeOnMac.pdf">SmartNode Setup Guide for Mac</a> has been released. (Thanks to <a href="https://forum.smartcash.cc/u/controllinghand">controllinghand</a>)
+        </p>
       </div>
+
+			<div class="box">
+				<h2 id="SmartNode_Setup">Setup your SmartNode</h2>
+				<h3 id="SmartNode_Setup_Guide">SmartNode Setup Guides</h3>
+				<p>
+					<ul>
+					<li><span class="label label-primary">Outdated</span> <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.0.pdf">SmartNode Setup Guide v1.0</a></li>
+					<li><span class="label label-primary">Outdated</span> <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1.pdf">SmartNode Setup Guide v1.1</a> <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1_RUS.pdf"><span class="badge">Russian</span></a> <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.1_GER.pdf"><span class="badge">German</span></a> (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)</li>
+					<li><span class="label label-success">Latest</span> <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.2.pdf">SmartNode Setup Guide v1.2</a> <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.2_RUS.pdf"><span class="badge">Russian</span></a> <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.2_GER.pdf"><span class="badge">German</span></a> (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)</li>
+					</ul>
+					<ul>
+					<li><span class="label label-info">New</span> <a href="http://smartnodes.cc/files/CreatingSmartNodeOnMac.pdf">SmartNode Setup Guide for Mac</a> (Thanks to <a href="https://forum.smartcash.cc/u/controllinghand">controllinghand</a>)</li>
+					</ul>
+				</p>
+				<h3>SmartNode Setup Guides for a particular VPS provider</h3>
+				<p>
+					<ul>
+					<li><a href="https://smartcash.blockchainlibrary.org/2018/01/guide-to-createing-a-smartcash-smartnode-vps-in-10-minutes-with-vultr/">Guide to Creating a SmartCash SmartNode VPS in 10 Minutes with Vultr</a> (Thanks to <a href="https://forum.smartcash.cc/u/blockchainlibrary">Blockchain Library</a>)</li>
+					</ul>
+				</p>
+				<h3 id="SmartNode_Bash_Scripts">SmartNode Bash Scripts</h3>
+				<p>
+					<ul>
+					<li><a href="https://github.com/SmartCash/smartnode">Bash installer for SmartNodes on Ubuntu</a> (Thanks to <a href="https://forum.smartcash.cc/u/msg768">msg768</a>)</li>
+					<li><span class="label label-warning">Experimental</span> <a href="https://github.com/kevinrombach/smartnodeinstaller">SmartNode Installer Script</a> (Thanks to <a href="https://forum.smartcash.cc/u/dustinface">dustinface</a>)</li>
+					<li><span class="label label-warning">Experimental</span> <a href="https://github.com/nflaw/smartnode">SmartNode standalone security and cronjob addon</a> (Thanks to <a href="https://forum.smartcash.cc/u/nflaw">nflaw</a>)</li>
+					<li><span class="label label-warning">Experimental</span> <a href="https://github.com/controllinghand/smartnode-checkonly">SmartNode Checker</a> (Thanks to <a href="https://forum.smartcash.cc/t/bash-checker-for-smartnode-on-ubuntu-if-you-already-have-a-smartnode-configured/2936">controllinghand</a>)</li>
+					</ul>
+				</p>
+			</div>
 
 			<div class="box">
 				<h2 id="SmartNode_FAQ">SmartNode FAQ</h2>
@@ -97,7 +158,7 @@
 				<h3>Is there a install script for SmartNodes?</h3>
 				<p>Yes, there is a <a href="https://github.com/SmartCash/smartnode">official bash installer for SmartNodes on Ubuntu</a>. It comes with cronjobs to make sure that your node is always running and up-to-date as well as secure against DDoS attacks.</p>
 				<p>Please not that this installer is only suitable for a dedicated VPS. The anti-DDoS script in this installer will disable all ports including the HTTP, HTTPS and DNS ports. It will only leave the SmartNode port open as well as a custom port for SSH.</p>
-				<p>There is also an unofficial <a href="https://github.com/kevinrombach/smartnodeinstaller">SmartNode Installer Script</a> maintained by <strong>dustinface</strong>.
+				<p>There is also an unofficial <a href="https://github.com/kevinrombach/smartnodeinstaller">SmartNode Installer Script</a> maintained by <a href="https://forum.smartcash.cc/u/dustinface">dustinface</a>.
 				<h3>How long does it take for my SmartNode to change it's status from PRE_ENABLED to ENABLED?</h3>
 				<p>It should take about 10 to 20 minutes or less. If it takes longer than that you can run <code>smartcash-cli smartnode status</code> and it will show you why it can't proceed.</p>
 				<p>If it turns to EXPIRED you have to check if there's something wrong with your setup.</p>
@@ -132,7 +193,7 @@ It can be solved by adding the following line to smartcash.conf on your VPS:
 					</tr>
 				</tbody>
 				</table></p>
-				<p>Last Updated: 2018-01-11 00:49:40 UTC</p>
+				<p>Bootstrap is updated on a regular basis.</p>
 				<p>This download is kindly provided by <strong><a href="https://forum.smartcash.cc/u/proteus">Proteus</a></strong></p>
 			</div>
         </div>
@@ -157,12 +218,18 @@ It can be solved by adding the following line to smartcash.conf on your VPS:
               <p><a href="http://smartnodes.cc">SmartNodes.cc</a> services provided by <a href="https://forum.smartcash.cc/u/nflaw">nflaw</a> | Donate: SP8AVfZkThkPtf8WBfqnEmYi27FjHguJTB <br /> GFX by <strong>trance929</strong> and <strong>camakin</strong> | Built and hosted on <a href="https://github.com/smartnodescc">Github (open source project)</a></p>
       </footer>
 
+    </div> <!-- /container -->
 
 <!--
 	<script src="js/countdown.js"></script>
 -->
-</div>
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 <!--
