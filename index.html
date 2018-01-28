@@ -52,6 +52,10 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#SmartNode_Setup">SmartNode Setup</a></li>
+              <li><a href="#SmartNode_Hardening">SmartNode Hardening</a></li>
+<!--
+              <li><a href="#SmartNode_Commands">SmartNode Commands</a></li>
+-->
               <li><a href="#SmartNode_FAQ">SmartNode FAQ</a></li>
 
               <li class="dropdown">
@@ -132,6 +136,148 @@
 			</div>
 
 			<div class="box">
+				<h2 id="SmartNode_Hardening">Hardening your SmartNode</h2>
+				<p>
+				<strong>BE CAREFUL:</strong> Please do only apply changes illustrated below if you know what you are doing.<br />
+				Also <u>make sure you have done a backup/snapshot of your VPS first</u>, so that you are able to recover in case of an error.<br />
+				Most of the following changes are already covered by <a href="#SmartNode_Bash_Scripts">SmartNode Bash Scripts</a>.<br />
+				The steps described in this section have been written to the advantage that they all can be applied separately.
+				</p>
+				<h3><span class="label label-warning">Security</span> Change your SSH port</h3>
+				<p>Think of a number you want to use instead of the default SSH port number (22).<br />
+				In this example we have chosen port number 15735. (But please make up your own!)
+				</p>
+				<ol>
+					<li>Whitelist your custom ssh port with your VPS provider. The procedure depends on which service you are using. You have to basically login to your VPS web front-end, navigate to network security rules (or similar) and add a Custom TCP Rule which allows inbound connections to this specific port.</li>
+					<li>Connect to your VPS with root credentials and add the custom ssh port to your firewall:
+						<p><code>ufw disable</code></p>
+						<p><code>ufw allow 15735/tcp</code></p>
+						<p><code>ufw limit 15735/tcp</code></p>
+						<p><code>ufw logging on</code></p>
+						<p><code>ufw enable</code></p>
+						<p><u>If you used the SmartNode Setup Guide to begin with, this step is crucial.</u></p></li>
+					<li>Change the default port number to the custom one in the SSH daemon:
+						<p><code>pico /etc/ssh/sshd_config</code></p>
+						<p>Change the line <code>Port 22</code> to your custom port, in this example <code>Port 15735</code> and save.</p>
+					<li>Recheck with <code>ufw status</code> and <code>pico /etc/ssh/sshd_config</code> if your custom port changes have been applied.</li>
+					<li>Reboot your server.</li>
+					<li>Now connect to your VPS using your custom SSH port. If everything went fine, you can remove the default SSH port entrys from your firewall now:</li>
+						<p><code>ufw delete allow 22/tcp</code></p>
+						<p><code>ufw delete limit 22/tcp</code></p>
+					<li>Reboot your server once again.</li>
+					<li>Finally login to the web front-end of your VPS provider and remove the default SSH port 22 from the list of open ports (list where you added your custom port in step 1).</li>
+					</li>
+				</ol>
+				<h3><span class="label label-primary">Stability</span> Setup cronjobs to keep SmartNode always running</h3>
+				<ol>
+					<li>Connect to your VPS with root credentials and create a directory for the cronjob scripts:
+						<p><code>mkdir smartnode</code></p>
+						<p><code>cd ~/smartnode/</code></p></li>
+					<li>Download the appropriate scripts (taken from the <a href="https://github.com/SmartCash/smartnode">SmartNode Bash installer</a> by <a href="https://forum.smartcash.cc/u/msg768">msg768</a>):</p>
+						<p><code>wget https://raw.githubusercontent.com/SmartCash/smartnode/master/makerun.sh</code></p>
+						<p><code>wget https://raw.githubusercontent.com/SmartCash/smartnode/master/checkdaemon.sh</code></p></li>
+					<li>Give execute permission to the cron scripts:</p>
+						<p><code>chmod 0700 ./makerun.sh</code></p>
+						<p><code>chmod 0700 ./checkdaemon.sh</code></p></li>
+					<li>Open crontabs with <code>crontab -e</code> and add the following lines to it:
+						<p><code>*/1 * * * * ~/smartnode/makerun.sh</code></p>
+						<p><code>*/30 * * * * ~/smartnode/checkdaemon.sh</code></p></li>
+					<li>Apply the cronjobs by reloading them with <code>/etc/init.d/cron reload</code> or <code>service cron reload</code></li>
+				</ol>
+				<h3><span class="label label-primary">Stability</span> Ensure SmartNode software is always up to date</h3>
+				<ol>
+					<li>Connect to your VPS with root credentials and create a directory for the cronjob script (if it not already exists):
+						<p><code>mkdir smartnode</code></p>
+						<p><code>cd ~/smartnode/</code></p></li>
+					<li>Download the appropriate script (taken from the <a href="https://github.com/SmartCash/smartnode">SmartNode Bash installer</a> by <a href="https://forum.smartcash.cc/u/msg768">msg768</a>):</p>
+						<p><code>wget https://raw.githubusercontent.com/SmartCash/smartnode/master/upgrade.sh</code></p></li>
+					<li>Give execute permission to the cron script:</p>
+						<p><code>chmod 0700 ./upgrade.sh</code></p></li>
+					<li>Open crontabs with <code>crontab -e</code> and add the following line to it:
+						<p><code>*/120 * * * * ~/smartnode/upgrade.sh</code></p></li>
+					<li>Apply the cronjob by reloading with <code>/etc/init.d/cron reload</code> or <code>service cron reload</code></li>
+				</ol>
+				<h3><span class="label label-primary">Stability</span> Setup cronjob to clear debug.log</h3>
+				<p>
+				This step is to prevent the debug.log from getting too large.
+				</p>
+				<ol>
+					<li>Connect to your VPS with root credentials and create a directory for the cronjob script (if it not already exists):
+						<p><code>mkdir smartnode</code></p>
+						<p><code>cd ~/smartnode/</code></p></li>
+					<li>Download the appropriate script (taken from the <a href="https://github.com/SmartCash/smartnode">SmartNode Bash installer</a> by <a href="https://forum.smartcash.cc/u/msg768">msg768</a>):</p>
+						<p><code>wget https://raw.githubusercontent.com/SmartCash/smartnode/master/clearlog.sh</code></p></li>
+					<li>Give execute permission to the cron script:</p>
+						<p><code>chmod 0700 ./clearlog.sh</code></p></li>
+					<li>Open crontabs with <code>crontab -e</code> and add the following line to it:
+						<p><code>0 0 */2 * * ~/smartnode/clearlog.sh</code></p></li>
+					<li>Apply the cronjob by reloading with <code>/etc/init.d/cron reload</code> or <code>service cron reload</code></li>
+				</ol>
+				<h3><span class="label label-primary">Stability</span> Set a Connection Limit</h3>
+				<ol>
+					<li>Connect to your VPS with your smartadmin user and stop your SmartNode: <code>smartcash-cli stop</code></li>
+					<li><p>Open your smartcash.conf with <code>pico ~/.smartcash/smartcash.conf</code> and add the following line:</p>
+				<p><code>maxconnections=64</code></p></li>
+					<li>Restart your SmartNode: <code>smartcashd</code></li>
+				</ol>
+				<h3><span class="label label-primary">Stability</span> Allocating a Swap File</h3>
+				<p>
+				This step is especially recommended to those who run a VPS with less than 2 GB RAM. It virtually enhances your RAM using a swap file.
+				</p>
+				<ol>
+					<li>Make you sure you have about 4 GB additional space to spare on your VPS.</li>
+					<li>Connect to your VPS with root credentials and run the following commands:
+						<p><code>fallocate -l 4G /swapfile</code></p>
+						<p><code>chmod 600 /swapfile</code></p>
+						<p><code>mkswap /swapfile</code></p>
+						<p><code>swapon /swapfile</code></p>
+					</li>
+					<li>Open <code>pico /etc/fstab</code> and add the following line at the end of the file (press tab to separate each word/number):
+						<p><code>/swapfile none swap sw 0 0</code></p>
+					</li>
+					<li>Finally reboot your server, a 4 GB sized swap file should have been created.</li>
+				</ol>
+				<p>SmartNode Hardening Guide written and maintained by <a href="https://forum.smartcash.cc/u/nflaw">nflaw</a>. (Last updated: <strong>2018-01-28</strong>)</p>
+			</div>
+
+			<div class="box">
+				<h2 id="SmartNode_Commands">SmartNode Basic Commands</h2>
+<table class="table table-bordered">
+    <caption>Note: If you didn't install via PPA, put <code>./</code> in front of the command.</caption>
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Command</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Start SmartCash client</td> 
+            <td><code>smartcashd</code></td> 
+        </tr>
+        <tr>
+            <td>Display SmartCash client info</td> 
+            <td><code>smartcash-cli getinfo</code></td>
+        </tr>
+        <tr>
+            <td>Start SmartNode</td> 
+            <td><code>smartcash-cli smartnode start</code></td>
+        </tr>
+        <tr> 
+            <td>Stop SmartNode</td> 
+            <td><code>smartcash-cli stop</code></td>
+        </tr>
+        <tr> 
+            <td>Force reindex of blockchain data</td> 
+            <td><code>smartcashd -reindex-chainstate</code></td>
+        </tr>
+    </tbody>
+</table>
+				<p>
+				</p>
+			</div>
+
+			<div class="box">
 				<h2 id="SmartNode_FAQ">SmartNode FAQ</h2>
 				<h3>What are the requirements to run a SmartNode?</h3>
 				<p>
@@ -174,7 +320,7 @@ It can be solved by adding the following line to smartcash.conf on your VPS:
 <code>externalip=PUT_EXTERNAL_IP_OF_YOUR_NODE_HERE</code></p>
 				<h3>Where do I get further support regarding SmartNodes?</h3>
 				<p>Please visit <a href="https://discord.gg/BDUh8jr">#smartnodes on Discord</a>, follow <a href="https://twitter.com/smartcashassist">SmartCash support on Twitter</a> or consult our <a href="https://smartcash.freshdesk.com">SmartCash support platform</a>.</p>
-            Frequently asked questions and answers on SmartNodes compiled from Discord by <strong>nflaw</strong>. Last updated: <strong>2018-01-18</strong>.
+				<p>Frequently asked questions and answers on SmartNodes compiled from Discord by <a href="https://forum.smartcash.cc/u/nflaw">nflaw</a>. (Last updated: <strong>2018-01-18</strong>)</p>
 			</div>
 <!--
       <div id="root"></div>
