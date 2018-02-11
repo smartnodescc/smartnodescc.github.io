@@ -111,6 +111,7 @@
         2018-01-29: <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide-v2-1-mac-version-quick-setup/3022">SmartNode Setup Guide v2.1 for Mac Users Quick Setup</a> has been released. (Thanks to <a href="https://forum.smartcash.cc/u/controllinghand">controllinghand</a>)<br />
         2018-01-29: <a href="https://forum.smartcash.cc/t/adding-a-2nd-smartcash-smartnode-setup-guide-v2-0-for-mac-users-quick-setup-guide/3019">Adding a 2nd+ SmartNode Setup Guide v2.0 for Mac Users</a> has been released. (Thanks to <a href="https://forum.smartcash.cc/u/controllinghand">controllinghand</a>)<br />
         2018-02-01: <a href="https://www.youtube.com/watch?v=CEFw6Y1BAMc">How To Set Up Your SmartNode Video for Windows 10 users</a> has been released. (Thanks to <a href="https://forum.smartcash.cc/u/hannahlicious">hannahlicious</a>)<br />
+        2018-02-10: <a href="http://smartnodes.cc/files/SmartNode_Payment_Determination_R3.pdf">SmartNode Payment Determination</a> has been released. (also added to the <a href="#SmartNode_Payment_Determination">FAQ</a>) (Thanks to <a href="https://forum.smartcash.cc/u/solarminer">Solarminer</a>)
         </p>
       </div>
 
@@ -307,6 +308,10 @@
             <td><code>smartcash-cli stop</code></td>
         </tr>
         <tr> 
+            <td>Show SmartNode Status</td> 
+            <td><code>smartcash-cli smartnode status</code></td>
+        </tr>
+        <tr> 
             <td>Force reindex of blockchain data</td> 
             <td><code>smartcashd -reindex-chainstate</code></td>
         </tr>
@@ -341,16 +346,35 @@
 				<p><code>rm txindexstrap.zip</code></p>
 				</code>
 				<h3>Is there a install script for SmartNodes?</h3>
-				<p>Yes, there is a <a href="https://github.com/SmartCash/smartnode">official bash installer for SmartNodes on Ubuntu</a>. It comes with cronjobs to make sure that your node is always running and up-to-date as well as secure against DDoS attacks.</p>
+				<p>Yes, there is a <a href="https://github.com/SmartCash/smartnode">bash installer for SmartNodes on Ubuntu</a>. It comes with cronjobs to make sure that your node is always running and up-to-date as well as secure against DDoS attacks.</p>
 				<p>Please not that this installer is only suitable for a dedicated VPS. The anti-DDoS script in this installer will disable all ports including the HTTP, HTTPS and DNS ports. It will only leave the SmartNode port open as well as a custom port for SSH.</p>
-				<p>There is also an unofficial <a href="https://github.com/kevinrombach/smartnodeinstaller">SmartNode Installer Script</a> maintained by <a href="https://forum.smartcash.cc/u/dustinface">dustinface</a>.
+				<p>There are also several other <a href="#SmartNode_Bash_Scripts">custom SmartNode bash scripts</a> provided by members of the SmartCash Community.
 				<h3>How long does it take for my SmartNode to change it's status from PRE_ENABLED to ENABLED?</h3>
 				<p>It should take about 10 to 20 minutes or less. If it takes longer than that you can run <code>smartcash-cli smartnode status</code> and it will show you why it can't proceed.</p>
 				<p>If it turns to EXPIRED you have to check if there's something wrong with your setup.</p>
 				<h3>Do I have to have the desktop wallet always on when running a SmartNode?</h3>
 				<p>No, as soon as the SmartNode reached it's ENABLED status, you basically just have to make sure that you VPS keeps running. The software wallet enables you to monitor and re-enable your node.</p>
-				<h3>When will SmartNode rewards payments start?</h3>
-				<p>SmartNode rewards will be activated on block height 300,000, which will be some time around January 29th.</p>
+				<h3>When did SmartNode reward payments start?</h3>
+				<p>SmartNode rewards were activated at block height 300,000 on Jan 31, 2018 5:25:00 AM UTC.</p>
+				<h3 id="SmartNode_Payment_Determination">How are SmartNode reward payments determined?</h3>
+				<p>SmartNode payments in SmartCash wallet version 1.1.0 are determined using a decentralised deterministic queue with probability driven selection.</p>
+				<p>Every SmartNode appears in the global list. Their position in this list is determined by the time from the last payment. New SmartNodes and SmartNodes that received a payment are placed at the end of the list. It is recommended to only use the command ‘start-missing' to start SmartNodes since it will only start nodes that need to be started. You can also use ‘start-alias’ and specify the specific node you want to start. The start-all command will reset the payment queue on any active nodes.</p>
+				<p>As SmartNodes are moved to the end of the global list, the remaining SmartNodes slowly migrate towards the top of the list. Once a SmartNode reaches the top 10% of the global list, it is eligible for selection from the selection pool. <i>As an example, if there are 8000 active SmartNodes, the top 800 SmartNodes in the global list are eligible for selection.</i></p>
+				<p>Once in the selection pool, selection for payment is determined by the block hash and transaction ID which is used to randomly select the next node in the pool to pay.</p>
+				<h3>How are the SmartNode reward payment intervals calculated?</h3>
+				<p>To calculate the average days between payment intervals (after the first payment), we can use this formula:</p>
+				<p><strong>SmartNode Payment Interval in days = (Total Global Enabled SmartNodes) / 1571</strong></p>
+				<p>This represents the average days between payments. Payments vary widely based on the random selection parameters. Some payments can be 11 days and some 1 day. You should not expect a payment before 5 days from starting a node with a new 10,000 SmartCash transaction.</p>
+				<p>At 8000 total enabled nodes a payment interval would be about 5 days with a range of 1-11 days.</p>
+				<h3>How to ensure my SmartNode is eligible for reward payments?</h3>
+				<p>
+					<ul>
+					<li>SmartNodes must have a <strong>unique SmartCash address</strong> per 10k collateral transaction.</li>
+					<li>SmartNodes must have a <strong>unique static IPV4 address</strong> per smartnode the IP address needs to be the same as what is used in the smartnode.conf file.</li>
+					<li>SmartNodes must <strong>run 24/7 and not stop for longer than 1 hour</strong> or they drop off the payment queue. Any transaction that <strong>sends from the specific 10,000 SMART</strong> collateral transaction will drop the node off from the payment queue.</li>
+					<li>SmartNodes also qualify for SmartRewards. SmartRewards are paid on the 25th of each month as long as there has been over 1000 in an address and no transaction sent from that address from the previous 25 Sending a smartnode payment from your wallet will disqualify rewards even if you don’t send from the 10,000 SMART collateral transaction.</li>
+					</ul>
+				</p>
 				<h3>Node status error "Not capable smartnode: Smartnode not in smartnode list"</h3>
 				<p>You most likely haven't applied the steps described in Section 9 of the Setup Guide correctly. The final steps after setting up the VPS are that you move to your desktop computer once again, edit the smartnode.conf there and finally start the node from your software wallet (SmartNodes tab).</p>
 				<h3>Node status error "Not capable smartnode: Can't detect valid external address ...</h3>
