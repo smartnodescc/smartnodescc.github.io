@@ -53,14 +53,13 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#SmartNode_Setup">SmartNode Setup</a></li>
               <li><a href="#SmartNode_Hardening">SmartNode Hardening</a></li>
-<!--
               <li><a href="#SmartNode_Commands">SmartNode Commands</a></li>
--->
               <li><a href="#SmartNode_FAQ">SmartNode FAQ</a></li>
 
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">External SmartNode Ressources <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">SmartNode Resources <span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                  <li class="dropdown-header">External Resources</li>
                   <li><a href="https://smartcash.bitcoiner.me/smartnodes/list">SmartNodes List</a></li>
                   <li><a href="https://smartcash.bitcoiner.me/smartnodes/calculator">SmartNodes Income Calculator</a></li>
                   <li><a href="https://smartnode.aneis.ch/smartnode_chart.html">SmartNodes Count Chart</a></li>
@@ -111,7 +110,8 @@
         2018-01-29: <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide-v2-1-mac-version-quick-setup/3022">SmartNode Setup Guide v2.1 for Mac Users Quick Setup</a> has been released. (Thanks to <a href="https://forum.smartcash.cc/u/controllinghand">controllinghand</a>)<br />
         2018-01-29: <a href="https://forum.smartcash.cc/t/adding-a-2nd-smartcash-smartnode-setup-guide-v2-0-for-mac-users-quick-setup-guide/3019">Adding a 2nd+ SmartNode Setup Guide v2.0 for Mac Users</a> has been released. (Thanks to <a href="https://forum.smartcash.cc/u/controllinghand">controllinghand</a>)<br />
         2018-02-01: <a href="https://www.youtube.com/watch?v=CEFw6Y1BAMc">How To Set Up Your SmartNode Video for Windows 10 users</a> has been released. (Thanks to <a href="https://forum.smartcash.cc/u/hannahlicious">hannahlicious</a>)<br />
-        2018-02-10: <a href="http://smartnodes.cc/files/SmartNode_Payment_Determination_R3.pdf">SmartNode Payment Determination</a> has been released. (also added to the <a href="#SmartNode_Payment_Determination">FAQ</a>) (Thanks to <a href="https://forum.smartcash.cc/u/solarminer">Solarminer</a>)
+        2018-02-04: <a href="https://t.me/SmartNodeMonitorBot">SmartNode Monitor Bot on Telegram</a> is live. (Thanks to <a href="https://forum.smartcash.cc/t/smartnode-monitor-telegram-discord/2766">dustinface</a>)<br />
+        2018-02-10: <a href="http://smartnodes.cc/files/SmartNode_Payment_Determination_R3.pdf">SmartNode Payment Determination</a> has been released. (Also added to the <a href="#SmartNode_Payment_Determination">FAQ</a>) (Thanks to <a href="https://forum.smartcash.cc/u/solarminer">Solarminer</a>)
         </p>
       </div>
 
@@ -155,6 +155,13 @@
 					<li><span class="label label-warning">Experimental</span> <a href="https://github.com/controllinghand/smartnode-checkonly">SmartNode Checker</a> (Thanks to <a href="https://forum.smartcash.cc/t/bash-checker-for-smartnode-on-ubuntu-if-you-already-have-a-smartnode-configured/2936">controllinghand</a>)</li>
 					<li><span class="label label-warning">Experimental</span> <a href="https://github.com/LithMage/smartcash-bootstrap-script-win10">SmartCash TX Index Bootstrap PowerShell script for Windows 10</a> (Thanks to <strong>LithMage</strong>)</li>
 					<li><span class="label label-warning">Experimental</span> <a href="https://steemit.com/smartcash/@lukestokes/scripts-for-managing-multiple-smartcash-smart-nodes-on-one-server">Scripts for Managing Multiple Smart Nodes on One Server</a> (Thanks to <a href="https://forum.smartcash.cc/u/lukestokes">lukestokes</a>)</li>
+					<li><span class="label label-warning">Experimental</span> <a href="https://github.com/controllinghand/smartnode-monitor">SmartNode Check and Monitor script (Are you at best practice setup?)</a> (Thanks to <a href="https://forum.smartcash.cc/t/smartnode-check-and-monitor-script-v1-0-are-you-at-best-practice-setup/3243">controllinghand</a>)</li>
+					</ul>
+				</p>
+				<h3>SmartNode Monitoring</h3>
+				<p>
+					<ul>
+					<li><span class="label label-info">New</span> <a href="https://t.me/SmartNodeMonitorBot">SmartNode Monitor Bot on Telegram</a> (Thanks to <a href="https://forum.smartcash.cc/t/smartnode-monitor-telegram-discord/2766">dustinface</a>)</li>
 					</ul>
 				</p>
 			</div>
@@ -292,24 +299,113 @@
     </thead>
     <tbody>
         <tr>
-            <td>Start SmartCash client</td> 
+            <td>Start smartcash client</td> 
             <td><code>smartcashd</code></td> 
         </tr>
         <tr>
-            <td>Display SmartCash client info</td> 
+            <td>Display smartcash client info</td> 
             <td><code>smartcash-cli getinfo</code></td>
         </tr>
+        <tr> 
+            <td>Print number of all known smartnodes<br />
+            (optional: 'ps', 'enabled', 'all', 'qualify')
+            </td> 
+            <td><code>smartcash-cli smartnode count</code></td>
+        </tr>
+        <tr> 
+            <td>Print info on current smartnode winner to be paid the next block<br />
+            (calculated locally)</td> 
+            <td><code>smartcash-cli smartnode current</code></td>
+        </tr>
+        <tr> 
+            <td>Generate new smartnodeprivkey</td> 
+            <td><code>smartcash-cli smartnode genkey</code></td>
+        </tr>
         <tr>
-            <td>Start SmartNode</td> 
+            <td>Start smartnode</td> 
             <td><code>smartcash-cli smartnode start</code></td>
         </tr>
         <tr> 
-            <td>Stop SmartNode</td> 
+            <td>Stop smartnode</td> 
             <td><code>smartcash-cli stop</code></td>
         </tr>
         <tr> 
-            <td>Show SmartNode Status</td> 
+            <td>Print smartnode status information</td> 
             <td><code>smartcash-cli smartnode status</code></td>
+        </tr>
+         <tr> 
+            <td>Print list of all known smartnodes<br />
+            (see smartnodelist for more info)
+            </td> 
+            <td><code>smartcash-cli smartnode list</code></td>
+        </tr>
+         <tr> 
+            <td>Print info on next smartnode winner to vote for</td> 
+            <td><code>smartcash-cli smartnode winner</code></td>
+        </tr>
+         <tr> 
+            <td>Print list of smartnode winners</td> 
+            <td><code>smartcash-cli smartnode winners</code></td>
+        </tr>
+         <tr> 
+            <td>Get a list of smartnodes in different modes</td> 
+            <td><code>smartcash-cli smartnodelist</code></td>
+        </tr>
+         <tr> 
+            <td>Print number of seconds smartnode recognized by the network as enabled<br />
+            (since latest issued "smartnode start/start-many/start-alias")
+            </td> 
+            <td><code>smartcash-cli smartnodelist activeseconds &lt;collateral txid&gt;</code></td>
+        </tr>
+         <tr> 
+            <td> Print ip address associated with a smartnode<br />
+            (can be additionally filtered, partial match)
+            </td> 
+            <td><code>smartcash-cli smartnodelist addr &lt;collateral txid&gt;</code></td>
+        </tr>
+         <tr> 
+            <td>Print info in format<br /> 'status protocol payee lastseen activeseconds lastpaidtime lastpaidblock IP'<br />
+            (can be additionally filtered, partial match)
+            </td> 
+            <td><code>smartcash-cli smartnodelist full</code></td>
+        </tr>
+         <tr> 
+            <td>Print the last block height a node was paid on the network</td> 
+            <td><code>smartcash-cli smartnodelist lastpaidblock &lt;collateral txid&gt;</code></td>
+        </tr>
+         <tr> 
+            <td>Print the last time a node was paid on the network</td> 
+            <td><code>smartcash-cli smartnodelist lastpaidtime &lt;collateral txid&gt;</code></td>
+        </tr>
+         <tr> 
+            <td>Print timestamp of when a smartnode was last seen on the network</td> 
+            <td><code>smartcash-cli smartnodelist lastseen &lt;collateral txid&gt;</code></td>
+        </tr>
+          <tr> 
+            <td> Print Smartcash address associated with a smartnode<br />
+            (can be additionally filtered, partial match)
+            </td> 
+            <td><code>smartcash-cli smartnodelist payee &lt;collateral txid&gt;</code></td>
+        </tr>
+          <tr> 
+            <td>Print protocol of a smartnode<br />
+            (can be additionally filtered, exact match)
+            </td> 
+            <td><code>smartcash-cli smartnodelist protocol &lt;collateral txid&gt;</code></td>
+        </tr>
+          <tr> 
+            <td>Print rank of a smartnode based on current block</td> 
+            <td><code>smartcash-cli smartnodelist rank &lt;collateral txid&gt;</code></td>
+        </tr>
+          <tr> 
+            <td> Print smartnode status:<br />
+            PRE_ENABLED / ENABLED /<br />
+            EXPIRED / WATCHDOG_EXPIRED /<br />
+            NEW_START_REQUIRED / UPDATE_REQUIRED /<br />
+            POSE_BAN / OUTPOINT_SPENT<br />
+            (can be additionally filtered, partial match)
+            </td> 
+            <td><code>smartcash-cli smartnodelist status &lt;status&gt;</code></td>
         </tr>
         <tr> 
             <td>Force reindex of blockchain data</td> 
@@ -372,18 +468,20 @@
 					<li>SmartNodes must have a <strong>unique SmartCash address</strong> per 10k collateral transaction.</li>
 					<li>SmartNodes must have a <strong>unique static IPV4 address</strong> per smartnode the IP address needs to be the same as what is used in the smartnode.conf file.</li>
 					<li>SmartNodes must <strong>run 24/7 and not stop for longer than 1 hour</strong> or they drop off the payment queue. Any transaction that <strong>sends from the specific 10,000 SMART</strong> collateral transaction will drop the node off from the payment queue.</li>
-					<li>SmartNodes also qualify for SmartRewards. SmartRewards are paid on the 25th of each month as long as there has been over 1000 in an address and no transaction sent from that address from the previous 25 Sending a smartnode payment from your wallet will disqualify rewards even if you don’t send from the 10,000 SMART collateral transaction.</li>
+					<li>SmartNodes also qualify for SmartRewards. SmartRewards are paid on the 25th of each month as long as there has been over 1000 in an address and no transaction sent from that address from the previous 25th. Sending a smartnode payment from your wallet will disqualify rewards even if you don’t send from the 10,000 SMART collateral transaction.</li>
 					</ul>
+				<strong>Note:</strong> There is a <u>delay for first payment</u> after the initial 10,000 smart collateral transaction. This delay is calculated by <strong>(2.6 minutes) * (number of enabled nodes)</strong>. After the first payment, the rewards are calculated as stated above.
+				Example: If I make my 10,000 smart collateral transactions to a new address for a fresh node with the current 8000 node count, it will take up to 14 days for the first reward. (Thanks to <a href="https://steemit.com/smartcash/@allemeister/smartnode-rewards-explained">allemeister</a> for pointing this out.)
 				</p>
 				<h3>Node status error "Not capable smartnode: Smartnode not in smartnode list"</h3>
-				<p>You most likely haven't applied the steps described in Section 9 of the Setup Guide correctly. The final steps after setting up the VPS are that you move to your desktop computer once again, edit the smartnode.conf there and finally start the node from your software wallet (SmartNodes tab).</p>
+				<p>You most likely haven't applied the steps described in Section 9 of the <a href="#SmartNode_Setup_Guide">Setup Guide</a> correctly. The final steps after setting up the VPS are that you move to your desktop computer once again, edit the smartnode.conf there and finally start the node from your software wallet (SmartNodes tab).</p>
 				<h3>Node status error "Not capable smartnode: Can't detect valid external address ...</h3>
 				<p>Your hosting provider most likely doesn't support automatically assignation of the external IP or IPv4. This issue has been reported with AWS (Amazon Web Services), among others.
 It can be solved by adding the following line to smartcash.conf on your VPS:
 <code>externalip=PUT_EXTERNAL_IP_OF_YOUR_NODE_HERE</code></p>
 				<h3>Where do I get further support regarding SmartNodes?</h3>
-				<p>Please visit <a href="https://discord.gg/BDUh8jr">#smartnodes on Discord</a>, follow <a href="https://twitter.com/smartcashassist">SmartCash support on Twitter</a> or consult our <a href="https://smartcash.freshdesk.com">SmartCash support platform</a>.</p>
-				<p>Frequently asked questions and answers on SmartNodes compiled from Discord by <a href="https://forum.smartcash.cc/u/nflaw">nflaw</a>. (Last updated: <strong>2018-01-18</strong>)</p>
+				<p>Please visit <a href="https://discord.gg/BDUh8jr">#smartnodes on Discord</a>, you can also post to the dedicated category on <a href="https://forum.smartcash.cc/c/smartnodes">SmartCash Community Forums</a>, follow <a href="https://twitter.com/smartcashassist">SmartCash support on Twitter</a> or consult our <a href="https://smartcash.freshdesk.com">SmartCash support platform</a>.</p>
+				<p>Frequently asked questions and answers on SmartNodes compiled from Discord by <a href="https://forum.smartcash.cc/u/nflaw">nflaw</a>. (Last updated: <strong>2018-02-11</strong>)</p>
 			</div>
 <!--
       <div id="root"></div>
