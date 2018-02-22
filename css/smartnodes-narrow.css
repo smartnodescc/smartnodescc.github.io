@@ -72,6 +72,10 @@ a:focus {
   font-weight: bold;
 }
 
+.jumbotron {
+  background-color: #fff;
+}
+
 .jumbotron h1 {
   text-align: center;
   font-size: 4em;
