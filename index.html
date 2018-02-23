@@ -92,6 +92,10 @@
         <strong>PLEASE BE AWARE OF SCAMMERS:</strong> <u>In order to run a SmartNode you don't have to send your SMART to anybody!</u> You can manage your node, while you keep your funds safe in your local wallet, this also applies to Masternode Hosting services. At the moment, we advise against using services that offer ways of sharing SMART to run a SmartNode, as it is likely that scammers can use this ask for funds and not return them.
       </div>
 
+      <div class="alert alert-danger" role="alert">
+        Please <a href="https://github.com/SmartCash/smartcash/releases/tag/v1.1.1">upgrade all your SmartNodes and wallets to v1.1.1</a> by Feb 28th. This upgrade is mandatory. Read our <a href="#Mandatory_Upgrade_v1.1.1">Guide on the v1.1.1 upgrade</a>.
+      </div>
+
       <div class="alert alert-success" role="alert" id="SmartNode_Latest">
 				<p>
         2018-01-08: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.0.pdf">SmartNode Setup Guide v1.0</a> has been released. Other language versions will be announced as available.<br />
@@ -110,6 +114,7 @@
         2018-02-04: <a href="https://t.me/SmartNodeMonitorBot">SmartNode Monitor Bot on Telegram</a> is live. (Thanks to <a href="https://forum.smartcash.cc/t/smartnode-monitor-telegram-discord/2766">dustinface</a>)<br />
         2018-02-10: <a href="http://smartnodes.cc/files/SmartNode_Payment_Determination_R3.pdf">SmartNode Payment Determination</a> has been released. (Also added to the <a href="#SmartNode_Payment_Determination">FAQ</a>) (Thanks to <a href="https://forum.smartcash.cc/u/solarminer">Solarminer</a>)<br />
         2018-02-13: <a href="https://discord.gg/8zTBZ73t">SmartNode Monitor Bot on SmartCash Discord</a> is live. (Thanks to <a href="https://forum.smartcash.cc/t/smartnode-monitor-telegram-discord/2766">dustinface</a>)<br />
+        <strong>2018-02-23: <a href="https://github.com/SmartCash/smartcash/releases/tag/v1.1.1">SmartNode/Wallet v1.1.1</a> has been released. (Stability Improvements)</strong> 
         </p>
       </div>
 
@@ -164,6 +169,40 @@
 					<li><span class="label label-info">New</span> <a href="https://discord.gg/8zTBZ73">SmartNode Monitor Bot on SmartCash Discord</a>, just PM <i>@SmartNodeMonitor#5083</i> (Thanks to <a href="https://forum.smartcash.cc/t/smartnode-monitor-telegram-discord/2766">dustinface</a>)</li>
 					<li><span class="label label-success">Guide</span> <a href="https://steemit.com/smartcash/@dustinface/smartnodemonitorbot">SmartNode Monitor Bot Guide</a> by <strong>dustinface</strong> (Thanks!)</li>
 					</ul>
+				</p>
+			</div>
+
+			<div class="box">
+				<h2 id="Mandatory_Upgrade_v1.1.1">SmartNode Mandatory Upgrade v1.1.1</h2>
+				<p>
+				As of Feb 23rd 2018 <a href="https://github.com/SmartCash/smartcash/releases/tag/v1.1.1">Smartnode/Wallet v1.1.1</a> has been released.<br />
+				This upgrade includes fundamental stability improvements such as SmartNode payment stability and core stability fixes.
+				</p>
+				<p>
+				SmartNode operators are obliged to both upgrade their SmartNodes and desktop wallets <u>until Feb 28, 2018 13:20 UTC</u>, otherwise their SmartNodes will be excluded from the SmartNode reward payment rotation.
+				</p>
+				<p>
+				<strong>BE AWARE:</strong> With this upgrade you will need to restart your SmartNode from your local wallet and therefore <u>lose your current place in the payment queue</u>. Unfortunately, this cannot be avoided. If you don't want to lose your spot, you can try to do the upgrade right after receiving a reward payment.
+				</p>
+				<p>
+				Upgrade to v1.1.1 as following:
+				</p>
+				<ol>
+					<li>Connect to your VPS with root credentials and run the following command (PPA):
+						<p><code>smartcash-cli stop && apt-get update && sleep 5 && apt-get install smartcashd && sleep 8 && smartcashd</code></p></li>
+					<li><p>Delete the peers.dat files with <code>rm ~/.smartcash/peers.*</code></p></li>
+					<li><p>Check your SmartNode status with <code>smartcash-cli smartnode status</code><br />
+					It should return <strong>"status": "Not capable smartnode: Invalid protocol version"</strong></p></li>
+					<li><p>Switch to your local wallet and install <a href="https://smartcash.cc/wallets">SmartNode/Wallet v1.1.1 for Windows/Linux/MacOS</a> accordingly.</p></li>
+					<li><p>Open the SmartNodes tab, select the specific SmartNode you just upgraded and click on 'Start alias'.</p></li>
+					<li><p>Wait until the SmartNode status changes from PRE_ENABLED to ENABLED and you successfully upgraded to v1.1.1.</p></li>
+				</ol>
+				<p>
+				While the SmartNodes network is migrating from v1.1.0 to v1.1.1, you may experience interruptions (like high CPU loads) with SmartNodes that are still running on the old version. Therefore it is recommended to proceed with your upgrade asap.
+				</p>
+				<p>
+				<hr>
+				SmartNode Mandatory Upgrade v1.1.1 Guide written and maintained by <a href="https://forum.smartcash.cc/u/nflaw">nflaw</a>. Thanks to <strong>Proteus</strong> for the answers. (Last updated: <strong>2018-02-23</strong>)
 				</p>
 			</div>
 
@@ -285,6 +324,7 @@
 					</li>
 					<li>Finally reboot your server, a 4 GB sized swap file should have been created.</li>
 				</ol>
+				<hr>
 				<p>SmartNode Hardening Guide written and maintained by <a href="https://forum.smartcash.cc/u/nflaw">nflaw</a>. (Last updated: <strong>2018-01-30</strong>)</p>
 			</div>
 
@@ -482,6 +522,7 @@ It can be solved by adding the following line to smartcash.conf on your VPS:
 <code>externalip=PUT_EXTERNAL_IP_OF_YOUR_NODE_HERE</code></p>
 				<h3>Where do I get further support regarding SmartNodes?</h3>
 				<p>Please visit <a href="https://discord.gg/BDUh8jr">#smartnodes on Discord</a>, you can also post to the dedicated category on <a href="https://forum.smartcash.cc/c/smartnodes">SmartCash Community Forums</a>, follow <a href="https://twitter.com/smartcashassist">SmartCash support on Twitter</a> or consult our <a href="https://smartcash.freshdesk.com">SmartCash support platform</a>.</p>
+				<hr>
 				<p>Frequently asked questions and answers on SmartNodes compiled from Discord by <a href="https://forum.smartcash.cc/u/nflaw">nflaw</a>. (Last updated: <strong>2018-02-11</strong>)</p>
 			</div>
 <!--
