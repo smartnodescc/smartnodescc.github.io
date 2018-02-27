@@ -82,7 +82,7 @@
 
 
       <div class="jumbotron">
-		<a href="https://smartcash.cc/wallets/" alt="SmartNodes are here!" title="SmartNodes are here!"><img src="img/smartnodes_splash.png" class="img-responsive" alt="SmartNodes are here!"></a>
+		<a href="https://smartcash.cc/wallets/" alt="SmartNodes are here!" title="SmartNodes are here!"><img src="img/SmartNodes-Over-10000.jpg" class="img-responsive" alt="SmartNodes are here!"></a>
         <h1><a href="https://smartcash.cc/wallets/">SmartNodes are here!</a></h1>
 <!--
         <h2><div id="countdown"></div></h2>
@@ -161,6 +161,7 @@
 					<li><span class="label label-warning">Experimental</span> <a href="https://steemit.com/smartcash/@lukestokes/scripts-for-managing-multiple-smartcash-smart-nodes-on-one-server">Scripts for Managing Multiple Smart Nodes on One Server</a> (Thanks to <a href="https://forum.smartcash.cc/u/lukestokes">lukestokes</a>)</li>
 					<li><span class="label label-warning">Experimental</span> <a href="https://github.com/controllinghand/smartnode-monitor">SmartNode Check and Monitor script (Are you at best practice setup?)</a> (Thanks to <a href="https://forum.smartcash.cc/t/smartnode-check-and-monitor-script-v1-0-are-you-at-best-practice-setup/3243">controllinghand</a>)</li>
 					<li><span class="label label-warning">Experimental</span> <a href="https://steemit.com/smartcash/@popcornpopper/smartcash-smartnode-first-aid-script">Smartnode First Aid kit</a> (Thanks to <strong>popcornpopper</strong>)</li>
+					<li><span class="label label-warning">Experimental</span> <a href="https://github.com/LithMage/smartnode">SmartNode Upkeep Scripts</a> (Thanks to <strong>LithMage</strong>)</li>
 					</ul>
 				</p>
 				<h3>SmartNode Monitoring</h3>
@@ -240,22 +241,6 @@
 					<li>Finally login to the web front-end of your VPS provider and remove the default SSH port 22 from the list of open ports (list where you added your custom port in step 1).</li>
 					</li>
 				</ol>
-				<h3><span class="label label-warning">Security</span> Apply Anti-DDoS Script</h3>
-				<p><strong>CAUTION:</strong> This Anti-DDoS script is only suitable for a dedicated VPS.<br /><u>It will disable all ports including the HTTP, HTTPS and DNS ports</u>. It will only leave the SmartNode port (9678) open as well as the SSH port.
-				</p>
-				<ol>
-					<li>Connect to your VPS with root credentials and download the anti-ddos script (taken from the <a href="https://github.com/SmartCash/smartnode">SmartNode Bash installer</a> by <a href="https://forum.smartcash.cc/u/msg768">msg768</a>):
-						<p><code>wget https://raw.githubusercontent.com/SmartCash/smartnode/master/anti-ddos.sh</code></p>
-					<li>Open the script with <code>pico anti-ddos.sh</code> and scroll down to the following line:</li>
-						<p><code># Allow outgoing SSH requests.<br />
-						$IPTABLES -A OUTPUT -m state --state NEW -p tcp --dport 14855 -j ACCEPT</code></p>
-					<li><p>Replace the port number <code>14855</code> with your SSH port (22 or custom port)</p></li>
-					<li>Scroll further down and also replace <code>14855</code> with your port number on this line:</li>
-						<p><code># Allow incoming SSH requests.<br />
-						$IPTABLES -A INPUT -m state --state NEW -p tcp --dport 14855 -j ACCEPT</code></p>
-					<li><p>Save the changes and run the anti-ddos script: <code>bash ./anti-ddos.sh</code></p>
-					<li><p>Finally reboot your server.</p>			
-				</ol>
 				<h3><span class="label label-primary">Stability</span> Setup cronjobs to keep SmartNode always running</h3>
 				<ol>
 					<li>Connect to your VPS with root credentials and create a directory for the cronjob scripts:
@@ -268,7 +253,8 @@
 						<p><code>chmod 0700 ./makerun.sh</code></p>
 						<p><code>chmod 0700 ./checkdaemon.sh</code></p></li>
 					<li>Open crontabs with <code>crontab -e</code> and add the following lines to it:
-						<p><code>*/1 * * * * ~/smartnode/makerun.sh</code></p>
+						<p><code>@reboot smartcashd</code></p>
+						<p><code>*/5 * * * * ~/smartnode/makerun.sh</code></p>
 						<p><code>*/30 * * * * ~/smartnode/checkdaemon.sh</code></p></li>
 					<li>Apply the cronjobs by reloading them with <code>/etc/init.d/cron reload</code> or <code>service cron reload</code></li>
 				</ol>
@@ -282,7 +268,7 @@
 					<li>Give execute permission to the cron script:</p>
 						<p><code>chmod 0700 ./upgrade.sh</code></p></li>
 					<li>Open crontabs with <code>crontab -e</code> and add the following line to it:
-						<p><code>*/120 * * * * ~/smartnode/upgrade.sh</code></p></li>
+						<p><code>0 0 */1 * * ~/smartnode/upgrade.sh</code></p></li>
 					<li>Apply the cronjob by reloading with <code>/etc/init.d/cron reload</code> or <code>service cron reload</code></li>
 				</ol>
 				<h3><span class="label label-primary">Stability</span> Setup cronjob to clear debug.log</h3>
