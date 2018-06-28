@@ -79,11 +79,13 @@
 
 
       <div class="jumbotron">
+          <!--
 		<a href="https://smartcash.cc/wallets/" alt="SmartNodes are here!" title="SmartNodes are here!"><img src="img/SmartNodes-Over-10000.jpg" class="img-responsive" alt="SmartNodes are here!"></a>
         <h1><a href="https://smartcash.cc/wallets/">SmartNodes are here!</a></h1>
 <!--
         <h2><div id="countdown"></div></h2>
 -->
+          <h1><a href="https://smartcash.cc/smartcash-v1-2-release-announcement-and-instructions/" target="_blank">Mandatory SmartNodes Update v1.2.2</a></h1>
       </div>
 
       <div class="alert alert-warning" role="alert">
@@ -91,11 +93,15 @@
       </div>
 
       <div class="alert alert-danger" role="alert">
-        Please <a href="https://github.com/SmartCash/smartcash/releases/tag/v1.1.1">upgrade all your SmartNodes and wallets to v1.1.1</a> by Feb 28th. This upgrade is mandatory. Read our <a href="#Mandatory_Upgrade_v1.1.1">guide on the v1.1.1 upgrade</a>.
+        Please <a href="https://github.com/SmartCash/Core-Smart/releases">upgrade all your SmartNodes and Node Wallets (Desktop Wallets) to v1.2.2</a> by July 1st. This upgrade is mandatory, only updated nodes will be paid soon.  Read the <a href="https://smartcash.cc/smartcash-v1-2-release-announcement-and-instructions/" target="_blank">release announcement and upgrade instructions for SmartCash v1.2.2</a>.
+
       </div>
 
       <div class="alert alert-success" role="alert" id="SmartNode_Latest">
-				<p>
+				<p>  
+        2018-06-26: <a href="https://smartcash.blockchainlibrary.org/2018/01/guide-to-creating-a-smartcash-smartnode-vps-in-10-minutes-with-vultr/">Guide to Creating a SmartCash SmartNode VPS in 10 Minutes with Vultr</a> has been updated for v1.2.2 by BlockchainLibrary.<br />  
+        2018-06-25: <a href="https://smartcash.blockchainlibrary.org/2018/01/guide-to-creating-a-smartcash-smartnode-vps-in-10-minutes-with-vultr/">SmartCash v1.2.2 Release Announcement and Instructions</a> has been posted by the SmartCash SmartHive Team.<br />                 
+        2018-06-22: <a href="https://forum.smartcash.cc/t/upgrade-your-smartnodes-to-1-2-2-version-mac-version/4538">Upgrade your SmartNodes to 1.2.2 version (Mac Version)</a> has been released by controllinghand.<br />          
         2018-01-08: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.0.pdf">SmartNode Setup Guide v1.0</a> has been released. Other language versions will be announced as available.<br />
         2018-01-09: <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1.pdf">SmartNode Setup Guide v1.1</a> has been released. Guide is now also available in <a href="http://smartnodes.cc/files/SmartCash_SmartNode_Setup_Guide_v1.1_RUS.pdf">Russian</a> and <a href="http://smartnodes.cc/files/SmartCash_Setup_Guide_v1.1_GER.pdf">German</a>. (Thanks to <a href="https://forum.smartcash.cc/t/smartcash-smartnode-setup-guide/2320">Azuuri</a>)<br />
         <strong>2018-01-11: <a href="https://github.com/SmartCash/smartcash/releases/tag/v1.1.0">SmartNode/Wallet v1.1.0</a> has been released. (Initial SmartNode release)</strong><br />
@@ -483,6 +489,8 @@
 				<p>SmartNode rewards were activated at block height 300,000 on Jan 31, 2018 5:25:00 AM UTC.</p>
 				<h3 id="SmartNode_Payment_Determination">How are SmartNode reward payments determined?</h3>
 				<p>SmartNode payments in SmartCash wallet version 1.1.0 are determined using a decentralised deterministic queue with probability driven selection.</p>
+                <p>SmartCash version 1.2.2 and later change the payment system to be faster.</p>
+                <p>"SmartNodes will now get paid more frequently. Starting with Block 545005, SmartNodes will be paid at a rate of 10 nodes every even block. SmartNode payments will be fully validated and agreed on by the network, and properly removed from the payment queue upon payment. The share of block rewards paid to nodes will not change, and each node payment will be approximately 2% of the block reward based on the faster payment cycle."</p>
 				<p>Every SmartNode appears in the global list. Their position in this list is determined by the time from the last payment. New SmartNodes and SmartNodes that received a payment are placed at the end of the list. It is recommended to only use the command ‘start-missing' to start SmartNodes since it will only start nodes that need to be started. You can also use ‘start-alias’ and specify the specific node you want to start. The start-all command will reset the payment queue on any active nodes.</p>
 				<p>As SmartNodes are moved to the end of the global list, the remaining SmartNodes slowly migrate towards the top of the list. Once a SmartNode reaches the top 10% of the global list, it is eligible for selection from the selection pool. <i>As an example, if there are 8000 active SmartNodes, the top 800 SmartNodes in the global list are eligible for selection.</i></p>
 				<p>Once in the selection pool, selection for payment is determined by the block hash and transaction ID which is used to randomly select the next node in the pool to pay.</p>
